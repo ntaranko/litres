@@ -39,6 +39,18 @@ public class WishListPage {
         menuItem.click();
     }
 
+    public void addBookToCartFromWishListQQQ(List<WebElement> booksList, int i) {
+
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement oneBook = booksList.get(i);
+        System.out.println(oneBook.findElement(By.xpath("//a[@data-testid=\"art__title\"]")).getText());
+        WebElement icon =  oneBook.findElement(Locators.BUTTON_BOOK_MENU);
+        icon.click();
+        WebElement menuItem = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(Locators.MENU_BOOK_ADD_TO_CART));
+        menuItem.click();
+    }
+
     public void addBookToCartFromWishList() {
         driver.findElement(Locators.BUTTON_BOOK_MENU).click();
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -46,14 +58,6 @@ public class WishListPage {
                 .visibilityOfElementLocated(Locators.MENU_BOOK_ADD_TO_CART));
         menuItem.click();
     }
-
-    /*public void addBookToCartFromWishList() {
-        driver.findElement(Locators.BUTTON_BOOK_MENU).click();
-        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement menuItem = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(Locators.MENU_BOOK_ADD_TO_CART));
-        menuItem.click();
-    }*/
 
     public boolean isNumberOnTabExist() {
         return ifElementExists(Locators.ICON_NUMBER_ITEMS_ON_WISHLIST_TAB);

@@ -1,6 +1,5 @@
 package ru.litres.pages;
 
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -8,8 +7,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.litres.singleton.Singleton;
 
+import java.time.Duration;
 import java.util.List;
 
 public class HomePage {
@@ -82,7 +85,10 @@ public class HomePage {
     }
 
     public void enterSearchCriteria(String searchCriteria) {
-        driver.findElement(Locators.FIELD_SEARCH).sendKeys(searchCriteria);
+        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement fieldSearch = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(Locators.FIELD_SEARCH));
+        fieldSearch.sendKeys(searchCriteria);
     }
 
     public void clickSearchButton() {
