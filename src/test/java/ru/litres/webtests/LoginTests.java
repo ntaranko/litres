@@ -4,18 +4,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.litres.HomePage;
-import ru.litres.Singleton;
+import ru.litres.pages.HomePage;
+import ru.litres.singleton.Singleton;
 
-public class WebLoginTests {
-
-    @Test
-    @DisplayName("test home page is opened")
-    public void test1() {
-        HomePage homePage = new HomePage();
-        homePage.openPage();
-        Assertions.assertEquals("© ООО «Литрес»", homePage.getCopyRightTest());
-    }
+public class LoginTests {
 
     @Test
     @DisplayName("invalid login is entered")
@@ -32,7 +24,6 @@ public class WebLoginTests {
     @DisplayName("verify message when correct email is entered")
     public void test3() {
         String email = "taranko.litres@gmail.com";
-
         HomePage homePage = new HomePage();
         homePage.openPage();
         homePage.clickEnterButton();

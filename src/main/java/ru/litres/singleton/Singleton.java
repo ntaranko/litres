@@ -1,4 +1,4 @@
-package ru.litres;
+package ru.litres.singleton;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
