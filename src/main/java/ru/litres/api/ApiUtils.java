@@ -31,4 +31,14 @@ public class ApiUtils {
         }
         return isTextBook;
     }
+
+    public static boolean isBookInCard(List<Integer> booksInCartList, String bookIdToAdd) {
+        System.out.println(booksInCartList.toString());
+        for (Integer bookID : booksInCartList) {
+            if (String.valueOf(bookID).equals(bookIdToAdd)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
