@@ -75,6 +75,7 @@ public class BookPage {
             driver.findElement(locator);
             return true;
         } catch (NoSuchElementException exception) {
+            logger.error(String.format("%s element doesn't exists", locator));
             return false;
         }
     }
