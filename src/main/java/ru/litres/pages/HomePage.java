@@ -131,10 +131,7 @@ public class HomePage {
         driver.findElement(Locators.BUTTON_BOOK_UNLIKED).click();
     }
 
-    public void removeFromWishlist(WebElement oneBook) {
-        logger.info("Remove liked book from wishlist");
-        driver.findElement(Locators.BUTTON_BOOK_LIKED).click();
-    }
+
 
     public void selectNewBooks() {
         logger.info("Select New books area");
