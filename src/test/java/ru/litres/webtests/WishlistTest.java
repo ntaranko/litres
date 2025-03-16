@@ -1,5 +1,7 @@
 package ru.litres.webtests;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -12,61 +14,98 @@ public class WishlistTest {
 
     @Test
     @DisplayName("add two books to wishlist - verify number on tab is correct")
-    public void test1() {
+    public void addTwoBooksToWishlist() {
+        String searchCriteria = "рабле";
         HomePage homePage = new HomePage();
-        homePage.openPage();
-        homePage.selectNewBooks();
-        homePage.addToFavourite(homePage.getListOfBooks().get(0));
-        homePage.addToFavourite(homePage.getListOfBooks().get(1));
-        WishListPage wishListPage = homePage.selectFavoriteBooksFromMenu();
+        openHomePageAndSearch(homePage, searchCriteria);
+        addBookToWishlist(homePage, 0);
+        addBookToWishlist(homePage, 1);
+        WishListPage wishListPage = homePage.selectWishlistFromMenu();
 
-        Assertions.assertEquals("2", wishListPage.getNumberOfItemsOnWishlistTab());
+        Allure.step("Validating results", step -> {
+            Assertions.assertEquals("2", wishListPage.getNumberOfItemsOnWishlistTab());
+        });
     }
 
     @Test
     @DisplayName("remove book from the wishlist - verify number on tab is correct")
-    public void test2() {
+    public void removeBookFromList() {
+        String searchCriteria = "рабле";
         HomePage homePage = new HomePage();
-        homePage.openPage();
-        homePage.selectNewBooks();
-        homePage.addToFavourite(homePage.getListOfBooks().get(0));
-        homePage.addToFavourite(homePage.getListOfBooks().get(1));
-        WishListPage wishListPage = homePage.selectFavoriteBooksFromMenu();
-        wishListPage.removeBookFromWishList();
+        openHomePageAndSearch(homePage, searchCriteria);
+        addBookToWishlist(homePage, 0);
+        addBookToWishlist(homePage, 1);
+        addBookToWishlist(homePage, 2);
+        WishListPage wishListPage = openWishListPageFromMenu(homePage);
+        removeBookFromWishlist(wishListPage, 1);
 
-        Assertions.assertEquals("1", wishListPage.getNumberOfItemsOnWishlistTab());
+        Allure.step("Validating results", step -> {
+            Assertions.assertEquals("2", wishListPage.getNumberOfItemsOnWishlistTab());
+        });
     }
 
     @Test
-    @DisplayName("remove all books from the wishlist")
-    public void test3() {
+    @DisplayName("remove book from the wishlist - verify number of books in wishlist is correct")
+    public void removeBookFromWishlistTest() {
+        String searchCriteria = "рабле";
         HomePage homePage = new HomePage();
-        homePage.openPage();
-        homePage.selectNewBooks();
-        homePage.addToFavourite(homePage.getListOfBooks().get(0));
-        homePage.addToFavourite(homePage.getListOfBooks().get(1));
-        WishListPage wishListPage = homePage.selectFavoriteBooksFromMenu();
-        wishListPage.removeBookFromWishList();
-        wishListPage.removeBookFromWishList();
+        openHomePageAndSearch(homePage, searchCriteria);
+        addBookToWishlist(homePage, 0);
+        addBookToWishlist(homePage, 1);
+        addBookToWishlist(homePage, 2);
+        WishListPage wishListPage = openWishListPageFromMenu(homePage);
+        removeBookFromWishlist(wishListPage, 1);
 
-        Assertions.assertFalse(wishListPage.isNumberOnTabExist());
+        Allure.step("Validating results", step -> {
+            Assertions.assertEquals("2",wishListPage.getNumberOfBooksOnWishlist());
+        });
     }
 
     @Test
-    @DisplayName("add to cart from the wishlist") //TBD
-    public void test4() {
+    @DisplayName("add book to cart from the wishlist")
+    public void addBookToCartTest() {
+        String searchCriteria = "рабле";
         HomePage homePage = new HomePage();
-        homePage.openPage();
-        homePage.selectNewBooks();
-        homePage.addToFavourite(homePage.getListOfBooks().get(0));
-        WishListPage wishListPage = homePage.selectFavoriteBooksFromMenu();
-        wishListPage.addBookToCartFromWishList();
+        openHomePageAndSearch(homePage, searchCriteria);
+        addBookToWishlist(homePage, 0);
+        addBookToWishlist(homePage, 1);
+        addBookToWishlist(homePage, 2);
+        WishListPage wishListPage = openWishListPageFromMenu(homePage);
+        addBookToCartFromWishList(wishListPage, 1);
 
-        Assertions.assertEquals("1", wishListPage.getNumberOfItemsInCart());
+        Allure.step("Validating results", step -> {
+            Assertions.assertEquals("1", wishListPage.getNumberOfItemsInCart());
+        });
     }
 
     @AfterEach
     public void afterEach() {
         Singleton.quit();
+    }
+
+    @Step("precondition: open home page and search")
+    void openHomePageAndSearch(HomePage homePage, String searchCriteria) {
+        homePage.openPage();
+        homePage.search(searchCriteria);
+    }
+
+    @Step("add book to wishlist")
+    void addBookToWishlist(HomePage homePage, int i) {
+        homePage.addToWishlist(homePage.getListOfBooks().get(i));
+    }
+
+    @Step("remove book to wishlist")
+    void removeBookFromWishlist(WishListPage wishListPage, int i) {
+        wishListPage.removeBookFromWishlist(i);
+    }
+
+    @Step("open wishlist")
+    WishListPage openWishListPageFromMenu(HomePage homePage) {
+        return homePage.selectWishlistFromMenu();
+    }
+
+    @Step("add book to cart")
+    void addBookToCartFromWishList(WishListPage wishListPage, int bookIndex) {
+        wishListPage.addBookToCartFromWishList(bookIndex);
     }
 }
