@@ -37,9 +37,16 @@ public class WishListPage {
         return driver.findElement(Locators.ICON_NUMBER_OF_ITEMS_IN_CART).getText();
     }
 
-    public void removeBookFromWishList() {
-        openMenuForBook();
-        logger.info("Wait for Remove form Wishlist menu appears");
+    public void openMenuForBook(int bookIndex) {
+        logger.info("Get list of menu buttons for all books in wishlist");
+        List<WebElement> icons = getMenuButtonsForAllBooks();
+        logger.info(String.format("Click menu button for the book with index %s to open Add to Cart menu", bookIndex));
+        icons.get(bookIndex).click();
+    }
+
+    public void removeBookFromWishlist(int bookIndex) {
+        openMenuForBook(bookIndex);
+        logger.info("Wait for Remove from wishlist menu appears");
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement menuItem = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(Locators.MENU_BOOK_REMOVE_FROM_WISHLIST));
@@ -47,35 +54,13 @@ public class WishListPage {
         menuItem.click();
     }
 
-    public void openMenuForBook() {
-        logger.info("Open menu for book");
-        driver.findElement(Locators.BUTTON_BOOK_MENU).click();
-    }
-
-    public void addBookToCartFromWishListQQQ(int index) {
-        List<WebElement> booksWishList = getListOfBooks(); // Always fetch latest list
-        booksWishList.get(index).click(); // Select the desired book
-    }
-
-   /* public void addBookToCartFromWishListQQQ(List<WebElement> booksList, int i) {
-
-        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement oneBook = booksList.get(i);
-        System.out.println(oneBook.findElement(By.xpath("//a[@data-testid=\"art__title\"]")).getText());
-        WebElement icon =  oneBook.findElement(Locators.BUTTON_BOOK_MENU);
-        icon.click();
-        WebElement menuItem = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(Locators.MENU_BOOK_ADD_TO_CART));
-        menuItem.click();
-    }*/
-
-    public void addBookToCartFromWishList() {
-        openMenuForBook();
+    public void addBookToCartFromWishList(int bookIndex) {
+        openMenuForBook(bookIndex);
         logger.info("Wait for Add to Cart menu appears");
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement menuItem = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(Locators.MENU_BOOK_ADD_TO_CART));
-        logger.info("Click menu");
+        logger.info("Click menu Add to Cart");
         menuItem.click();
     }
 
@@ -87,6 +72,11 @@ public class WishListPage {
     public List<WebElement> getListOfBooks() {
         logger.info("Get list of books");
         return driver.findElements(Locators.BOOK_ITEM);
+    }
+
+    public List<WebElement> getMenuButtonsForAllBooks() {
+        logger.info("Get menu buttons for all books");
+        return driver.findElements(Locators.BUTTON_BOOK_MENU);
     }
 
     public boolean ifElementExists(By locator) {
