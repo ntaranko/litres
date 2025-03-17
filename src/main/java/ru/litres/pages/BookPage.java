@@ -64,12 +64,6 @@ public class BookPage {
         return ifElementExists(Locators.ICON_FAVORITES_NOT_FILLED);
     }
 
-    public CartPage clickCartButton() {
-        logger.info("Click Cart button to navigate to cart");
-        driver.findElement(Locators.BUTTON_CART).click();
-        return new CartPage();
-    }
-
     public boolean ifElementExists(By locator) {
         try {
             driver.findElement(locator);
