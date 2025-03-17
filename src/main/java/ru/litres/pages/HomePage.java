@@ -122,14 +122,10 @@ public class HomePage {
         return driver.findElements(Locators.BOOK_ITEM);
     }
 
-
-
     public void addToWishlist(WebElement oneBook) {
         logger.info("Add book from the list to wishlist");
         driver.findElement(Locators.BUTTON_BOOK_UNLIKED).click();
     }
-
-
 
     public void selectNewBooks() {
         logger.info("Select New books area");
