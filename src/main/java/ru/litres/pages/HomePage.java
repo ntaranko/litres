@@ -51,8 +51,10 @@ public class HomePage {
     }
 
     public void clickContinueButtonOnLoginForm() {
+        logger.info("Wait for Continue button appears");
+        WebElement continueButton = waitForWebElement(Locators.BUTTON_CONTINUE_LOGIN);
         logger.info("Click continue button on Login form");
-        driver.findElement(Locators.BUTTON_CONTINUE_LOGIN).click();
+        continueButton.click();
     }
 
     public String getErrorTextWhenLogin() {
@@ -60,7 +62,7 @@ public class HomePage {
         return driver.findElement(Locators.TEXT_INPUT_ERROR).getText();
     }
 
-    public String getEnterPasswordText() {
+    public String getEnterPasswordForUserText() {
         logger.info("Get Enter Password text");
         return driver.findElement(Locators.TEXT_ENTER_PASSWORD_FOR_USER).getText();
     }
