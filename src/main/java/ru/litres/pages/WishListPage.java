@@ -4,14 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.litres.singleton.Singleton;
 
-import java.time.Duration;
 import java.util.List;
 
+import static ru.litres.singleton.Singleton.clickMenuItem;
 import static ru.litres.singleton.Singleton.ifElementExists;
 
 public class WishListPage {
@@ -46,22 +43,26 @@ public class WishListPage {
 
     public void removeBookFromWishlist(int bookIndex) {
         openMenuForBook(bookIndex);
-        logger.info("Wait for Remove from wishlist menu appears");
+        clickMenuItem(Locators.MENU_BOOK_REMOVE_FROM_WISHLIST);
+
+        /*logger.info("Wait for Remove from wishlist menu appears");
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement menuItem = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(Locators.MENU_BOOK_REMOVE_FROM_WISHLIST));
         logger.info("Click menu Remove from wishlist");
-        menuItem.click();
+        menuItem.click();*/
     }
 
     public void addBookToCartFromWishList(int bookIndex) {
         openMenuForBook(bookIndex);
-        logger.info("Wait for Add to Cart menu appears");
+        clickMenuItem(Locators.MENU_BOOK_ADD_TO_CART);
+
+        /*logger.info("Wait for Add to Cart menu appears");
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement menuItem = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(Locators.MENU_BOOK_ADD_TO_CART));
         logger.info("Click menu Add to Cart");
-        menuItem.click();
+        menuItem.click();*/
     }
 
     public boolean isNumberOnTabExist() {
