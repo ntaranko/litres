@@ -5,12 +5,8 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.litres.singleton.Singleton;
 
-import java.time.Duration;
 import java.util.List;
 
 import static ru.litres.singleton.Singleton.ifElementExists;
@@ -38,9 +34,7 @@ public class HomePage {
 
     public void clickEnterButton() {
         logger.info("Wait for Enter button appears");
-        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement enterButton = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(Locators.BUTTON_ENTER));
+        WebElement enterButton = waitForWebElement(Locators.BUTTON_ENTER);
         logger.info("Click Enter button to login");
         enterButton.click();
     }
