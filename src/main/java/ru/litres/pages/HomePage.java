@@ -14,6 +14,7 @@ import java.time.Duration;
 import java.util.List;
 
 import static ru.litres.singleton.Singleton.ifElementExists;
+import static ru.litres.singleton.Singleton.waitForWebElement;
 
 public class HomePage {
 
@@ -28,7 +29,6 @@ public class HomePage {
     public void openPage() {
         logger.info("Open home page");
         driver.get(URL);
-
     }
 
     public String getCopyRightTest() {
@@ -96,9 +96,7 @@ public class HomePage {
 
     public void enterSearchCriteria(String searchCriteria) {
         logger.info("Wait for Search field appears");
-        Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement fieldSearch = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(Locators.FIELD_SEARCH));
+        WebElement fieldSearch = waitForWebElement(Locators.FIELD_SEARCH);
         logger.info("Enter search criteria into field");
         fieldSearch.sendKeys(searchCriteria);
     }
