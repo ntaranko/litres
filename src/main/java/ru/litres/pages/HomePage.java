@@ -25,10 +25,10 @@ public class HomePage {
         this.driver = Singleton.getDriver();
     }
 
-    public HomePage openPage() {
+    public void openPage() {
         logger.info("Open home page");
         driver.get(URL);
-        return this;
+
     }
 
     public String getCopyRightTest() {
@@ -87,10 +87,6 @@ public class HomePage {
         logger.info("Select Liked Items menu");
         driver.findElement(Locators.MENU_LIKED_ITEM).click();
         return new WishListPage();
-    }
-
-    public void clickSelectBooksOnEmptyLiked() {
-        driver.findElement(Locators.BUTTON_SELECT_BOOKS_ON_EMPTY_LIKED).click();
     }
 
     public void search(String searchCriteria) {

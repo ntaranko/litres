@@ -38,7 +38,6 @@ public class Locators {
     final static By BUTTON_SEARCH = By.xpath("//button[@data-testid=\"search__button\"]");
     final static By TEXT_SEARCH_RESULTS = By.xpath("//h1[@data-testid=\"search-title__wrapper\"]");
     final static By BOOK_ITEM = By.xpath("//div[@data-testid=\"art__wrapper\"]//div[@class=\"Art_content__image__1N92h\"]");
-    final static By BUTTON_SELECT_BOOKS_ON_EMPTY_LIKED = By.xpath("//div[@class=\"EmptyState_empty__u9qK_\"]//div[@class=\"Button_textContainer__kfiHZ\"]");
 
     public Locators() {
     }

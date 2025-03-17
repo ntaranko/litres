@@ -69,11 +69,6 @@ public class WishListPage {
         return ifElementExists(Locators.ICON_NUMBER_ITEMS_ON_WISHLIST_TAB);
     }
 
-    public List<WebElement> getListOfBooks() {
-        logger.info("Get list of books");
-        return driver.findElements(Locators.BOOK_ITEM);
-    }
-
     public List<WebElement> getMenuButtonsForAllBooks() {
         logger.info("Get menu buttons for all books");
         return driver.findElements(Locators.BUTTON_BOOK_MENU);
