@@ -56,7 +56,7 @@ public class ApiSearchTests {
         List<List<String>> authors = jsonPath.getList("payload.data.instance.persons.full_name");
 
         Allure.step("Validating results: verify if book's Title or author contains search criteria", step -> {
-            Assertions.assertEquals(true, isArrayItemContainsSearchCriteria(titles, authors, searchCriteria, getRandomNumber(titles)));
+            Assertions.assertTrue( isArrayItemContainsSearchCriteria(titles, authors, searchCriteria, getRandomNumber(titles)));
         });
 
     }
