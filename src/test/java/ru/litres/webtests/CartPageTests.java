@@ -1,16 +1,15 @@
 package ru.litres.webtests;
+
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebElement;
 import ru.litres.pages.CartPage;
 import ru.litres.pages.HomePage;
 import ru.litres.pages.WishListPage;
 import ru.litres.singleton.Singleton;
-import java.util.List;
 
 public class CartPageTests {
 
@@ -117,11 +116,6 @@ public class CartPageTests {
     @Step("Open Cart page")
     CartPage clickCartButton(HomePage homePage) {
         return homePage.clickCartButton();
-    }
-
-    @Step("Get books list")
-    List<WebElement> getListOfBooks(WishListPage wishListPage) {
-        return wishListPage.getListOfBooks();
     }
 
     @Step("Remove book from cart")
