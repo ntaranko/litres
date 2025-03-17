@@ -30,7 +30,7 @@ public class ApiCartTest {
         List<Integer> booksInCartList = jsonPath.getList("payload.data.added_art_ids");
 
         Allure.step("Validating results", step -> {
-            Assertions.assertEquals(true, isBookInCard(booksInCartList, bookIdToAdd));
+            Assertions.assertTrue(isBookInCard(booksInCartList, bookIdToAdd));
         });
     }
 
