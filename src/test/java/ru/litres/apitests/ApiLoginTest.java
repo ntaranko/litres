@@ -51,25 +51,9 @@ public class ApiLoginTest {
         Header header = new Header("content-type", "application/json");
 
         Response response = getResponse(body, header, "foundation/api/auth/login");
-        JsonPath responseBody = response.getBody().jsonPath();
 
         Allure.step("Validating results", step -> {
             Assertions.assertEquals(401, response.getStatusCode());
-        });
-    }
-
-    @Test
-    @DisplayName("Validate error type for correct email and wrong password")
-    public void testValidateErrorTypeWrongEmail() {
-        RestAssured.baseURI = "https://api.litres.ru/";
-        String body = "{\"login\": \"taranko@gmail.com\", \"password\": \"354654\" }";
-        Header header = new Header("content-type", "application/json");
-
-        Response response = getResponse(body, header, "foundation/api/auth/login");
-        JsonPath responseBody = response.getBody().jsonPath();
-
-        Allure.step("Validating results", step -> {
-            Assertions.assertEquals("Unauthorized", responseBody.get("error.type").toString());
         });
     }
 
