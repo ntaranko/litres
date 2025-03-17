@@ -38,9 +38,10 @@ public class LoginTests {
         Allure.step("Validating results", step -> {
             Assertions.assertEquals(
                     String.format("Введите пароль для %s", email),
-                    homePage.getEnterPasswordText());
+                    homePage.getEnterPasswordForUserText());
         });
     }
+
 
     @Test
     @DisplayName("correct email and invalid password are entered")
