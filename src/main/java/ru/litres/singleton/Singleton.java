@@ -45,15 +45,11 @@ public class Singleton {
         }
     }
 
-    public static void clickMenuItem(By locator){
-        logger.info("Wait for Add to Cart menu appears");
+    public static WebElement waitForWebElement(By locator) {
         Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement menuItem = wait.until(ExpectedConditions
+        return wait.until(ExpectedConditions
                 .visibilityOfElementLocated(locator));
-        logger.info("Click menu Add to Cart");
-        menuItem.click();
     }
-
 
     public static void quit() {
         if (driver != null) {
