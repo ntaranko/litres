@@ -38,22 +38,11 @@ public class HomePageTest {
         String searchCriteria = "рабле";
         HomePage homePage = new HomePage();
         openHomePageAndSearch(homePage, searchCriteria);
-        Allure.step("Add book to the wishlist", step -> {
-            homePage.addToWishlist(homePage.getListOfBooks().get(0));
-        });
-        Allure.step("Validating results", step -> {
-            Assertions.assertEquals(String.format("Результаты поиска «%s»", searchCriteria), homePage.getTextSearchResults());
-        });
-    }
+        addBookToWishlist(homePage, 0);
 
-    @Test
-    @DisplayName("remove from wishlist from search results")
-    public void testRemoveFromWishlist() {
-        String searchCriteria = "рабле";
-        HomePage homePage = new HomePage();
-        openHomePageAndSearch(homePage, searchCriteria);
-        homePage.addToWishlist(homePage.getListOfBooks().get(0));
-        Assertions.assertEquals(String.format("Результаты поиска «%s»", searchCriteria), homePage.getTextSearchResults());
+        Allure.step("Validating results", step -> {
+            Assertions.assertTrue(isButtonLikedExistForBook(homePage, 0));
+        });
     }
 
     @AfterEach
@@ -70,5 +59,15 @@ public class HomePageTest {
     void openHomePageAndSearch(HomePage homePage, String searchCriteria) {
         homePage.openPage();
         homePage.search(searchCriteria);
+    }
+
+    @Step("add book to wishlist")
+    void addBookToWishlist(HomePage homePage, int i) {
+        homePage.addToWishlist(homePage.getListOfBooks().get(i));
+    }
+
+    @Step("Is Liked button exists")
+    boolean isButtonLikedExistForBook(HomePage homePage, int i) {
+        return homePage.isButtonLikedExistForBook(homePage.getListOfBooks().get(i));
     }
 }

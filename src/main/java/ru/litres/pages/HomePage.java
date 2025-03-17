@@ -127,11 +127,6 @@ public class HomePage {
         driver.findElement(Locators.BUTTON_BOOK_UNLIKED).click();
     }
 
-    public void selectNewBooks() {
-        logger.info("Select New books area");
-        driver.findElement(Locators.LINK_TEXT).click();
-    }
-
     public BookPage selectBookFromList(List<WebElement> booksList, int i) {
         logger.info("Select Book from list");
         booksList.get(i).click();
@@ -139,11 +134,6 @@ public class HomePage {
         logger.info("Switch to opened book page");
         driver.switchTo().window((String) windowHandles[1]);
         return new BookPage();
-    }
-
-    public boolean isButtonUnlikedExistForBook(WebElement oneBook) {
-        logger.info("Check if Unliked button exists for book");
-        return ifElementExists(Locators.BUTTON_BOOK_UNLIKED);
     }
 
     public boolean isButtonLikedExistForBook(WebElement oneBook) {
