@@ -2,10 +2,10 @@ package ru.litres.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import ru.litres.singleton.Singleton;
+
+import static ru.litres.singleton.Singleton.ifElementExists;
 
 public class BookPage {
     private WebDriver driver;
@@ -62,15 +62,5 @@ public class BookPage {
     public boolean isIconFavoritesNotFilled() {
         logger.info("Chick if icon Favorite is not filled");
         return ifElementExists(Locators.ICON_FAVORITES_NOT_FILLED);
-    }
-
-    public boolean ifElementExists(By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException exception) {
-            logger.error(String.format("%s element doesn't exists", locator));
-            return false;
-        }
     }
 }

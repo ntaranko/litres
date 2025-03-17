@@ -2,8 +2,6 @@ package ru.litres.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +11,8 @@ import ru.litres.singleton.Singleton;
 
 import java.time.Duration;
 import java.util.List;
+
+import static ru.litres.singleton.Singleton.ifElementExists;
 
 public class WishListPage {
     private WebDriver driver;
@@ -72,15 +72,5 @@ public class WishListPage {
     public List<WebElement> getMenuButtonsForAllBooks() {
         logger.info("Get menu buttons for all books");
         return driver.findElements(Locators.BUTTON_BOOK_MENU);
-    }
-
-    public boolean ifElementExists(By locator) {
-        try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException exception) {
-            logger.error("Element doesn't exist");
-            return false;
-        }
     }
 }
